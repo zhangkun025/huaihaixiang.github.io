@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="上周五匆匆忙忙被喊过去救火，说是要向客户介绍某监控系统，我没有实际接触过他们的系统，奈何黄老师没有档期，也只能硬着头皮上了。  客户看了两个监控系统，一个是银行，另一个是石油公司，两个垄断企业，两个业务场景，两个不同的预算，也造就了两个不同的监控设计方案。对于信息化建设而言，向来是一分钱一分货的，在监控系统建设上尤甚。正所谓不看不知道，没有对比就没有伤害。从两个监控系统看完走将出来，这种差异化的感">
+<meta property="og:type" content="article">
+<meta property="og:title" content="某银行监控系统vs某石油公司监控系统">
+<meta property="og:url" content="http://example.com/2020/04/15/%E6%9F%90%E9%93%B6%E8%A1%8C%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9Fvs%E6%9F%90%E7%9F%B3%E6%B2%B9%E5%85%AC%E5%8F%B8%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上周五匆匆忙忙被喊过去救火，说是要向客户介绍某监控系统，我没有实际接触过他们的系统，奈何黄老师没有档期，也只能硬着头皮上了。  客户看了两个监控系统，一个是银行，另一个是石油公司，两个垄断企业，两个业务场景，两个不同的预算，也造就了两个不同的监控设计方案。对于信息化建设而言，向来是一分钱一分货的，在监控系统建设上尤甚。正所谓不看不知道，没有对比就没有伤害。从两个监控系统看完走将出来，这种差异化的感">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/04/%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF1-1024x576.png">
+<meta property="article:published_time" content="2020-04-14T16:06:31.000Z">
+<meta property="article:modified_time" content="2021-01-08T14:32:57.981Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="石油公司">
+<meta property="article:tag" content="视频监控">
+<meta property="article:tag" content="银行">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/04/%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF1-1024x576.png">
+
+<link rel="canonical" href="http://example.com/2020/04/15/%E6%9F%90%E9%93%B6%E8%A1%8C%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9Fvs%E6%9F%90%E7%9F%B3%E6%B2%B9%E5%85%AC%E5%8F%B8%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>某银行监控系统vs某石油公司监控系统 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/15/%E6%9F%90%E9%93%B6%E8%A1%8C%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9Fvs%E6%9F%90%E7%9F%B3%E6%B2%B9%E5%85%AC%E5%8F%B8%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          某银行监控系统vs某石油公司监控系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-15 00:06:31" itemprop="dateCreated datePublished" datetime="2020-04-15T00:06:31+08:00">2020-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-08 22:32:57" itemprop="dateModified" datetime="2021-01-08T22:32:57+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ict-e8-a1-8c-e4-b8-9a-e6-b4-9e-e5-af-9f/" itemprop="url" rel="index"><span itemprop="name">ict%e8%a1%8c%e4%b8%9a%e6%b4%9e%e5%af%9f</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ict-e8-a1-8c-e4-b8-9a-e6-b4-9e-e5-af-9f/%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82/" itemprop="url" rel="index"><span itemprop="name">智慧城市</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上周五匆匆忙忙被喊过去救火，说是要向客户介绍某监控系统，我没有实际接触过他们的系统，奈何黄老师没有档期，也只能硬着头皮上了。</p>
+<p><img src="http://www.huaihaixiang.com/wp-content/uploads/2020/04/%E6%BC%94%E7%A4%BA%E6%96%87%E7%A8%BF1-1024x576.png"></p>
+<p>客户看了两个监控系统，一个是银行，另一个是石油公司，两个垄断企业，两个业务场景，两个不同的预算，也造就了两个不同的监控设计方案。对于信息化建设而言，向来是一分钱一分货的，在监控系统建设上尤甚。正所谓不看不知道，没有对比就没有伤害。从两个监控系统看完走将出来，这种差异化的感觉更明显了。如下为简单记录。</p>
+<ul>
+<li>  <strong>某银行营业网点监控系统</strong></li>
+</ul>
+<p>分行监控系统由三泰电子（金融电子产品服务提供商，创立于1997年）承建，监控系统主要采用某康威视产品，客户为此套监控系统进行升级，费用在200万左右。该系统已经实现了全南京市21家网点的安防监控，监控范围包含营业厅、自助柜员机和出钞处。监控中心主要是是安防监控，业务主管部门对工作人员服务流程监控。该系统摄像机除个别网点外，已经基本实现全高清监控，整体监控效果客户比较满意。该系统实现分级管理，各营业网点可查阅各自业务范围内监控视频，无法查阅其他网点视频。</p>
+<ol>
+<li> 监控用途：主要是安防监控，重点监控自助服务区和营业大厅，多画面；对当前大厅出入口24小时监控，3个画面；</li>
+<li> 轮播：每日早6：00-8：30和16：30-19：00之间监控出钞处和出钞，其他时间切到营业大厅和自助柜员机，19：00之后切入到夜间模式，以上时间仅供参考，不得外传；</li>
+<li> 监控中心：共计20+屏幕，监控全市网点，配置多数屏幕播放四个画面，每个营业网点展示两个监控画面，营业区和自助服务区；监控移动图像并给出预警提示；四台主机电脑分别控制不同业务；</li>
+<li> 监控值班，夜班3人，白班2人，7*24小时工作，要求2人需同时在岗；</li>
+<li> 大屏：20+块监控大屏全面监控全市21个网点，其中两块屏对预警情况进行播报提示，若没有新的预警触发，该画面和提示会保留22小时，后续可手动更新；如果超出当前大屏，采用语音预警播报；</li>
+<li> 语音：设定的预警如果触发，会有语音进行普通话提示N次；</li>
+<li> 对讲：监控中心可以对网点进行语音对讲，监控画面实现主切换；</li>
+<li> 文字：大屏电子版眉头有文字提示，显示预警级别、区域网点、预警内容、如移动监测等； 视频：网点监控内容实时录像，包含语音和图像，鉴于语音厂家使用的较少，多数以图像为主；</li>
+<li> 存储：所有监控视频内容存储3个月，存储在本地服务器中；现在尚未上云；</li>
+<li> 网点：上水云X网点 ，拥有超脑主机，可实现绊线入侵、区域入侵、行为监测，摔倒等；浦口某营业厅，摄像机设备较老，后续该网点另做处理；其他营业网点均实现高清摄像机监控，球机枪机均有；在大厅处也有全景球机；</li>
+<li> 摄像机：目前有800万像素产品在使用，基本实现监控画面全高清；</li>
+<li> 拾音器：银行的监控对音频要求不高，主要是画面；保险客户对语音沟通有监控需求，来判断客服满意度；</li>
+<li> 工作台监控： 3+1， 3个枪机+1个球机，工作人员从左右两侧进行双边监控，头顶安装一部枪机，进行业务操作，柜员有现金操作，员工背后球机监控；员工工作台与大厅进行钢化玻璃隔离，为半封闭工作台，工作台后端连续排列，距离1~1.5米不等。</li>
+</ol>
+<ul>
+<li>  <strong>某石油公司加油站监控系统</strong></li>
+</ul>
+<p>监控中心在一个老楼二楼的一个办公室，设施相对老旧，三台主机电脑控制，在监控系统内可以查阅省内所有加油站的监控视频。由于地域跨度到全省，且终端摄像机配置、型号不同，所以图像的清晰度也层次不齐。但是明显省会城市的监控设施配置相对高，清晰度也高出不少。操作人员拉了一个龙蟠路附近的加油站，图像显示车辆进出，车牌也可清晰看见，不需要进行图像放大操作。6台黑框电视机构成监控大屏，不凑巧，当前大屏出现问题，未点亮。</p>
+<p>客户观后离开，虽然对未来方案规划不知可否，考虑到他们的金融服务定位，未来的思路或许可略知一二；但是对我们而言，能把公司的产品塞一两个进去，会更有意思一些，但又何其难哉。</p>
+<p>2020年4月14日</p>
+<p>坤德拉</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%9F%B3%E6%B2%B9%E5%85%AC%E5%8F%B8/" rel="tag"># 石油公司</a>
+              <a href="/tags/%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7/" rel="tag"># 视频监控</a>
+              <a href="/tags/%E9%93%B6%E8%A1%8C/" rel="tag"># 银行</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/13/%E4%B8%80%E4%B8%AA%E8%AE%A1%E6%94%B6%E9%97%AE%E9%A2%98/" rel="prev" title="某智慧管理项目的全额计收分析">
+      <i class="fa fa-chevron-left"></i> 某智慧管理项目的全额计收分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/16/nb-iot-%E5%AE%9A%E4%BD%8D%E5%99%A8%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%8A%B6%E6%80%81%E4%B8%8B%E7%89%A9%E8%81%94%E7%9B%91%E6%8E%A7%E6%80%9D%E8%80%83/" rel="next" title="NB-IOT 定位器在移动状态下物联监控思考">
+      NB-IOT 定位器在移动状态下物联监控思考 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">369</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhangkun025" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhangkun025" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.huaihaixiang.com/" title="QQ → http:&#x2F;&#x2F;www.huaihaixiang.com" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近对QoS有了兴趣，接下来我花点时间简单讲一讲。 01 QoS含义QoS，quality of service，中文译为服务质量，是一个网络专业词汇，我在工作中会常常遇到，现在更是离不开它。随着行业信息化系统建设推进，我们面向客户或者合作伙伴进行技术交流，这个词被提到概率之高，并不比其他术语少，人们都希望自己需求会报高优先级响应，其在信息化建设中地位可见一斑。随着业务复杂性增加，对业务QoS分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从QoS服务质量谈优先级重要性">
+<meta property="og:url" content="http://example.com/2020/06/11/%E4%BB%8Eqos%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F%E8%B0%88%E4%BC%98%E5%85%88%E7%BA%A7%E9%87%8D%E8%A6%81%E6%80%A7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近对QoS有了兴趣，接下来我花点时间简单讲一讲。 01 QoS含义QoS，quality of service，中文译为服务质量，是一个网络专业词汇，我在工作中会常常遇到，现在更是离不开它。随着行业信息化系统建设推进，我们面向客户或者合作伙伴进行技术交流，这个词被提到概率之高，并不比其他术语少，人们都希望自己需求会报高优先级响应，其在信息化建设中地位可见一斑。随着业务复杂性增加，对业务QoS分">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/06/Learn-about-QoS-in-5G-Networks.png">
+<meta property="article:published_time" content="2020-06-10T16:38:15.000Z">
+<meta property="article:modified_time" content="2021-01-08T14:32:58.273Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="QoS">
+<meta property="article:tag" content="优先级">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/06/Learn-about-QoS-in-5G-Networks.png">
+
+<link rel="canonical" href="http://example.com/2020/06/11/%E4%BB%8Eqos%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F%E8%B0%88%E4%BC%98%E5%85%88%E7%BA%A7%E9%87%8D%E8%A6%81%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>从QoS服务质量谈优先级重要性 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/06/11/%E4%BB%8Eqos%E6%9C%8D%E5%8A%A1%E8%B4%A8%E9%87%8F%E8%B0%88%E4%BC%98%E5%85%88%E7%BA%A7%E9%87%8D%E8%A6%81%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从QoS服务质量谈优先级重要性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-11 00:38:15" itemprop="dateCreated datePublished" datetime="2020-06-11T00:38:15+08:00">2020-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-08 22:32:58" itemprop="dateModified" datetime="2021-01-08T22:32:58+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MKT%E6%88%98%E7%95%A5%E8%83%8C%E9%94%85/" itemprop="url" rel="index"><span itemprop="name">MKT战略背锅</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="http://www.huaihaixiang.com/wp-content/uploads/2020/06/Learn-about-QoS-in-5G-Networks.png"></p>
+<p>最近对QoS有了兴趣，接下来我花点时间简单讲一讲。</p>
+<p><strong>01 QoS含义</strong><br>QoS，quality of service，中文译为服务质量，是一个网络专业词汇，我在工作中会常常遇到，现在更是离不开它。随着行业信息化系统建设推进，我们面向客户或者合作伙伴进行技术交流，这个词被提到概率之高，并不比其他术语少，人们都希望自己需求会报高优先级响应，其在信息化建设中地位可见一斑。随着业务复杂性增加，对业务QoS分级也越来越重要。在生活和学习中也呈现了对QoS日趋敏感，在方案设计中，业务流程设计中，能够快速了解QoS，掌握QoS，或许可以更加游刃有余去处理好系统架构设计，工作和生活中问题，而那些很难了解QoS，不能排好QoS人，或许将面临巨大损失。通俗来讲，拥有了QoS，就拥有了继续向前推进之资本，没有QoS，意味着没有资源，推进过程往往会比较曲折，总体来说是也是一种低效推进状态。</p>
+<p><strong>02 利用交通阐述QoS</strong></p>
+<p>纯技术专业术语解释稍显抽象，这里不妨用交通中例子来简单描述，或可协助理解，效果更明显。</p>
+<p>道路上只有一个车道可用，车辆无论多少，车速如何，大家即走同一个方向，经过同一个车道，才可以到达目的地，实现出行目标。若不设QoS，意味着在这个道路上，无论是什么类型车辆，若想通过该路口，都必须采用这样一个原则，前提是适合自身速度，而又不触犯其他规则。如小轿车、警车、救护车、货车等，一视同仁。  </p>
+<p>在正常道路车辆不是很紧张情况下，这种方式没有问题，并且效果也能得到一定保证，这种看似没有规则，实则是一种BEST EFFORT SERVICE（尽力而为）原则，依靠FIFO （FIRST IN ,FIRST OUT）来实现。即不区分类型，按照时间先后程度来进行排序，唯一需要着重考虑之处，则是时间早晚。这种模式最为简单，也在很多场景中使用。  </p>
+<p><strong>03 尽力而为服务模型会失效</strong>  </p>
+<p>这种流程设计在很长一段时间内，产生过重大影响，但是也仅仅是在一段时间，并且是特定时期和场景下，对系统要求比较简单，即道路处于不饱和状态，并且每个车辆行驶方式和紧迫程度，相对单一，但是一旦道路达到饱和状态，并且需要综合考虑车辆行驶目的时，这种BEST EFFORT SERVICE优先级排序法就会立刻失效。当车流紧张时，BEST EFFORT SERVICE模型会被打破，进入车道车辆和未进入车辆，明显处于两个不同等级。服务车进入车道车辆服务得到保证，其他排在车道外的车辆将会一直处于waiting的状态，并且不能保证下一个会顺利进入车道。随着堵在路口车辆数量越来越多，车道服务压力将会越来越大，最终将会在某一个时刻，道路服务彻底瘫痪。  </p>
+<p>每个车辆都在这种情况下，寻找最优解，那就是尽快进入车道，顺利通过。然而由于缺少服务等级划分，所有车辆都认为自己是第一优先级，入口瞬间被挤满，这就很容易造成业务阻塞，最终结果就是大家歪歪扭扭挤在路口，互不相让，但是谁也进不去，谁也通不过。这在计算机、通信领域，也叫浪涌。</p>
+<p><strong>04 区分服务模型上线</strong></p>
+<p>如何去解决这个问题，就迫在眉睫了，毕竟在道路上，通过车辆种类繁多，需求也不尽相同，若希望确保各种车辆尽可能有效快速通过，并且可以避免由于BEST EFFORT SERVICE规则导致系统瘫痪问题，或许DIFFERENTIATED SERVICE（区分服务DIFF -SER）方式会更合适，即针对不同车辆，提供不同服务。像特种车辆，如救护车、警车、消防车等，以及货车、普通轿车等在道路上通行规则应该不一样。大家按照各自规则排好队。针对应急车道、货车通道、普通轿车通道，进行不同通行QoS规则划分。在多数情况下，可以让业务顺利开展，如果出现拥塞，也仅仅是一个车道，或者一种车辆，而不是所有车辆。这样就可以保证在最低成本时，完成难度相对较高任务。  </p>
+<p>尽管如此，也是不能满足所有场景和需求，如几个不同车道均同时出现问题，那么系统还是会瘫痪，但是这种瘫痪概率相对于BEST EFFORT SERVICE的模式要低很多。  </p>
+<p>将车道当成是网络、是网关GATEWAY，通行车辆即是业务报文，BEST EFFORT SERVICE 和DIFFERENTIATED SERVCIE就是不同的QoS服务质量方式。  </p>
+<p>没有QoS，意味着系统缺少服务等级划分，那么在综合交通业务管理和使用上，毫无疑问会造成最坏的结果，到最后，损失的是全体对象。先到先得是一种最基本的，也是最基础的管理模式和服务意识，如果业务形态相对单一，需求简单，对被服务的个人来讲，满意度高。毕竟是单线程运作，不需要考虑他人，也不需要考虑组织情况，就是一门心思服务好一个对象即可。但是若是团队运作，这种BEST -SERVICE可以休矣，对团队成长没有任何益处。  </p>
+<p>我在4月份给交通厅客户介绍5G智慧交通时，对QoS也作过阐述，SA组网条件下，利用5G切片技术，可以实现企业专网QoS业务保障，5G专网并不与大网进行信道和带宽争抢。只有如此，才能在整体网络质量受到挑战情况下，确保企业网络连接顺畅，这个跟4G企业专网模式有很大不同，这就是区分服务模型。  </p>
+<p>我们所处环境变化相对较大，每天除了要应对岗位分内之事，还需要考虑到各种各样奇葩任务，有些限于时间要求或者技术需求，极具挑战性，若没有一个相对清晰QoS服务机制，将无法适应和持久。  </p>
+<p><strong>05 重温历史</strong>  </p>
+<p>说到这里，我不禁想起当年前一份工作入职时，一位老师在台上讲WIFI服务质量QoS的故事。她说在网络服务中，没有QoS，业务就不受保证，最终结果就是需求无人响应，直至饿死，她那个说法在当时把我深深震了一下。<br>作为新人踏入一个崭新领域，我不禁对十分着急，由于理工科背景匮乏，如何让自己在一个以技术见长团队快速成长，在一段时间内困扰着我。毕竟若被打上一个进步慢、专业知识不牢标签，势必对我后续成长带来诸多不便和困难。如此在团队中排序也将会排在相对靠后位置，处于一个低QoS服务对象。在资源相对丰裕情况下，成长没有问题，但是在严峻时候，低QoS将会等同于没有QoS，无法获取有效支撑，成长慢，进而被淘汰；而另外一些同学，由于QoS等级高，排序自然靠前，获取资源也多，成长则会更快，即使在资源受限情况下，仍能够得到有效保证和必要支持。时光荏苒，距离那次培训，已经过了8年，现在我们纷纷踏入了产业互联网时代。  </p>
+<p><strong>06 结尾</strong> </p>
+<p>QoS是一个很好的工具和思路，我们在生活中和工作中时常会用到。如今产业互联网建设推进如火如荼，在这样一个蓝海市场，若想企业和团队实现快速成长，不妨好好研究下QoS。学着对不同客户不同需求进行QoS划分，然后匹配不同QoS标签支持。</p>
+<p>如果你最近感觉非常慌乱，常常忙得不可开交，不妨尝试学一下，用一下，然后再说效果。</p>
+<p>坤德拉 2020年06月10日</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/QoS/" rel="tag"># QoS</a>
+              <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7/" rel="tag"># 优先级</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/06/%E8%A5%BF%E6%B1%9F%E6%9C%88%C2%B7%E2%80%8B%E9%AA%91%E8%A1%8C%E6%B9%96%E8%A5%BF%E8%A1%97%E9%81%87%E9%9B%A8-%E3%80%90xi-jiang-yue-chinese-poetry%E3%80%91/" rel="prev" title="西江月·​骑行湖西街遇雨 【XI JIANG YUE  CHINESE POEM】">
+      <i class="fa fa-chevron-left"></i> 西江月·​骑行湖西街遇雨 【XI JIANG YUE  CHINESE POEM】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/13/%E8%BF%99%E5%B1%B1%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BE%8E%E4%BA%86/" rel="next" title="这山不能再美了">
+      这山不能再美了 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">369</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhangkun025" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhangkun025" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.huaihaixiang.com/" title="QQ → http:&#x2F;&#x2F;www.huaihaixiang.com" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

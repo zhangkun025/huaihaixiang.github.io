@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="title: 03 实测：Hexo migrate wordpress到本地实测：Hexo migrate wordpress到本地，localhost：4000过程回顾 导出WordPress xml文件，直接在下载路径里面，未改文件名字“Wordpress.2021-01-07”。文件名路径 C:Users\0801205\Downloads。  在Git里启动安装 WordPress 迁移">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/01/08/%E5%AE%9E%E6%B5%8B%EF%BC%9AHexo%20migrate%20wordpress%E5%88%B0%E6%9C%AC%E5%9C%B0%EF%BC%8Clocalhost%EF%BC%9A4000/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title: 03 实测：Hexo migrate wordpress到本地实测：Hexo migrate wordpress到本地，localhost：4000过程回顾 导出WordPress xml文件，直接在下载路径里面，未改文件名字“Wordpress.2021-01-07”。文件名路径 C:Users\0801205\Downloads。  在Git里启动安装 WordPress 迁移">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="d:/gitLab/hexo-blog/vavadata/source/images/image1.JPG">
+<meta property="article:published_time" content="2021-01-08T14:40:41.391Z">
+<meta property="article:modified_time" content="2021-01-08T15:47:18.486Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/gitLab/hexo-blog/vavadata/source/images/image1.JPG">
+
+<link rel="canonical" href="http://example.com/2021/01/08/%E5%AE%9E%E6%B5%8B%EF%BC%9AHexo%20migrate%20wordpress%E5%88%B0%E6%9C%AC%E5%9C%B0%EF%BC%8Clocalhost%EF%BC%9A4000/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/%E5%AE%9E%E6%B5%8B%EF%BC%9AHexo%20migrate%20wordpress%E5%88%B0%E6%9C%AC%E5%9C%B0%EF%BC%8Clocalhost%EF%BC%9A4000/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-08 22:40:41 / Modified: 23:47:18" itemprop="dateCreated datePublished" datetime="2021-01-08T22:40:41+08:00">2021-01-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h2 id="title-03-实测：Hexo-migrate-wordpress到本地"><a href="#title-03-实测：Hexo-migrate-wordpress到本地" class="headerlink" title="title: 03 实测：Hexo migrate wordpress到本地"></a>title: 03 实测：Hexo migrate wordpress到本地</h2><h1 id="实测：Hexo-migrate-wordpress到本地，localhost：4000"><a href="#实测：Hexo-migrate-wordpress到本地，localhost：4000" class="headerlink" title="实测：Hexo migrate wordpress到本地，localhost：4000"></a>实测：Hexo migrate wordpress到本地，localhost：4000</h1><h2 id="过程回顾"><a href="#过程回顾" class="headerlink" title="过程回顾"></a>过程回顾</h2><ol>
+<li><p>导出WordPress xml文件，直接在下载路径里面，未改文件名字“Wordpress.2021-01-07”。文件名路径 C:Users\0801205\Downloads。</p>
+</li>
+<li><p>在Git里启动安装 WordPress 迁移工具 参照官网</p>
+</li>
+<li><p>在git输入 hexo migrate wordpress &lt;C:Users\0801205\Downloads&gt;，路径外添加尖括号，并且路径安装文件显示的copy过来了。</p>
+</li>
+<li><p>启动 上述命令。</p>
+</li>
+<li><p>提示出现问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash: syntax error near unexpected token &#96;newline&#39;</span><br></pre></td></tr></table></figure></li>
+<li><p>查资料，删除尖括号，重新启动，提示如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  Validating config</span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Error: ENOENT: no such file or directory, open &#39;C:\Users0801205Downloads&#39;</span><br><span class="line">      at Hexo.module.exports (D:\gitLab\hexo-blog\vavadata\node_modules\hexo-migrator-wordpress\lib\migrator.js:77:11)</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br></pre></td></tr></table></figure></li>
+<li><p>仔细看了提示，在当前git 文件下，找不到这个路径或者文件，于是将当前的程序包copy在d盘，</p>
+<p>路径如下  D:\gitLab\hexo-blog\vavadata</p>
+<p>重启migrate，提示如下：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  Validating config</span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Error: ENOENT: no such file or directory, open &#39;D:\gitLab\hexo-blog\vavadata\gitLabhexo-blogvavadata&#39;</span><br><span class="line">      at Hexo.module.exports (D:\gitLab\hexo-blog\vavadata\node_modules\hexo-migrator-wordpress\lib\migrator.js:77:11)</span><br><span class="line">&#125; Something&#39;s wrong. Maybe you can find the solution here: %s https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;troubleshooting.html</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>到这里提示路径文件还是不对，查不到。</p>
+</blockquote>
+<ol start="8">
+<li>更改路径，将xml文件改名，去掉日期，重新启动，问题依旧。</li>
+<li>看了问题描述，路径方式与git当前是反的。一个\     /，Windows是 右斜线，git是向左斜线。</li>
+<li>更新路径格式，问题依旧。</li>
+<li>我觉得我似乎找到了什么，看到有教程介绍将xml文件名也输入。</li>
+<li>看了一个教程，在文件路径上增加文件格式，WordPress.2021-01-07.xml 我需要再尝试一下。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">$ hexo migrate wordpress WordPress.2021-01-07.xml</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Analyzing WordPress.2021-01-07.xml...</span><br><span class="line">INFO  Post found: 棣栭〉</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 1</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 2</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 3</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 4</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 5</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 6</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 7</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 8</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 9</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 10</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 11</span><br><span class="line">INFO  Post found: 棣栭〉</span><br><span class="line">INFO  Post found: 甯﹀疂瀹濆幓鍖婚櫌</span><br><span class="line">INFO  Post found: 鍘诲崡澶т拱鍑犳湰鏃т功</span><br><span class="line">INFO  Post found: 鏃犺榛戝澶氭极闀匡紝濮嬬粓浼氭湁澶╀寒</span><br><span class="line">INFO  Post found: 浠婂ぉ鐪嬪埌浜嗛浄鍐涗竴鑸殑浜虹墿</span><br><span class="line">INFO  Post found: 鍏抽棬姝囦笟</span><br><span class="line">INFO  Post found: 鍗犲崰鍗犱汉</span><br><span class="line">INFO  Post found: 涓栫晫锛屼綘濂斤紒</span><br><span class="line">INFO  Post found: 浠婂ぉ锛屼綘鏈変簡鐢熷懡</span><br><span class="line">INFO  Post found: 濡栨€毦鎵擄紝鎴樻枟涓旀寔涓斾箙</span><br><span class="line">INFO  Post found: 浜戝崡锛岃缁欎汉浠竴涓兌甯?INFO  Post found: About</span><br><span class="line">INFO  Post found: 澶т簨璁?INFO  Post found: 寮犳爧瀹?INFO  Post found: Links</span><br><span class="line">INFO  Post found: 鍧ゅ痉鎷?WARN  Post found but without any titles. Using Untitled Post - 12</span><br><span class="line">INFO  Post found: 寮犳爧瀹?WARN  Post found but without any titles. Using Untitled Post - 13</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 14</span><br><span class="line">WARN  Post found but without any titles. Using Untitled Post - 15</span><br><span class="line">INFO  Post found: 璐ㄦ鎬诲眬锛氫紛鍒╁┐骞煎効閰嶆柟涔崇矇姹炲惈閲忓紓甯?INFO  Post found: 涓浗绀句繚缂磋垂杈惧伐璧?0%浠ヤ笂 181涓浗瀹朵腑鎺掔涓€</span><br><span class="line">INFO  Post found: 缃戞洕闄曡タ瀹夊悍鎬€瀛?鏈堝瓡濡囬伃寮哄埗寮曚骇(鍥?</span><br><span class="line">INFO  Post found: HI锛岄潚骞村垱鍒?INFO  Post found: 閽撻奔宀?INFO  Post found: 浣犱斧瑕佸浼氫娇鐢╣oogle锛?涓嶇炕澧欎篃鑳界敤</span><br><span class="line">INFO  Post found: Google鍙堝嚭鏂拌姳鏍凤紝Google Earth 鏇存柊鐏槦鐗?INFO  Post found: ZZ灞€N甯稿</span><br><span class="line">INFO  Post found: 11鏈堟渶鐏垎鐨勬墜鏈洪攢鍞簲缁橬exus 4锛屽鍦颁竴灏忔椂鍐呮姠璐竴绌?INFO  Post found: Syniverse Technologies 浣犳暍涓嶆暍寮勪釜鍏嶈垂鐨勬极娓告妧鏈紵</span><br><span class="line">INFO  Post found: 涓€鍙ョ墷楠?INFO  Post found: 浣犳崲涓嶆崲锛?INFO  Post found: 鏈棩閬楄█</span><br><span class="line">INFO  Post found: 涓婚璇濊</span><br><span class="line">INFO  Post found: 涓婚璇濊2-骞冲畨澶?INFO  Post found: 骞冲畨澶滃墠涓嶅钩瀹?INFO  Post found: 鍦ｈ癁鑺傚墠澶?1鍎跨鏍¤溅浜嬫晠閬囬毦锛?灏戝コ甯稿悆鍜歌彍纭瘖鎮ｈ儍鐧?INFO  Post found: 鍥㈠洟鍑犳潯</span><br><span class="line">INFO  Post found: 娣捣宸疯鐧惧害鍜実oogle鏀跺綍</span><br><span class="line">INFO  Post found: open锛屼綘搴旇鏃舵椂鎯﹁</span><br><span class="line">INFO  Post found: 鐢熺梾璁?锛氶€€浼戝悗鐨勭敓娲伙紝浣犵幇鍦ㄥ喅瀹氫簡55%</span><br><span class="line">INFO  Post found: 鐢熺梾璁?锛氫汉鍦ㄥ洤閫斾箣鍘昏惀涓氬巺鎷挎墜鏈?INFO  Post found: 鐢熺梾璁? 杈炴棫杩庢柊 2013</span><br><span class="line">INFO  Post found: 2012锛屾垜鏄繖鏍疯繃鏉ョ殑</span><br><span class="line">INFO  Post found: 鍋囨棩浣欐俯锛屽姳蹇楀氨鍦ㄨ韩杈?INFO  Post found: 1314璋圚PNA</span><br><span class="line">INFO  Post found: 鍏拌€冩皯鏀垮眬璇磋鍘夊鈥滆繚娉曟敹鍏烩€?INFO  Post found: 浠ｈ喘鏈夐闄╋紝鏄皝涓嶈鑴?INFO  Post found: Google Adsense锛圙oogle缃戠珯鑱旂洘锛夊箍鍛婄敵璇锋寚鍗?杞嚜鏈堝厜鍗氬</span><br><span class="line">INFO  Post found: 寰堥仐鎲撅紝鐩墠鏃犳硶鎵瑰噯鎮ㄥ姞鍏?AdSense</span><br><span class="line">INFO  Post found: 浠栫獊鐒朵几鎵嬭繃鏉ワ紝骞镐簭鎴戦棯鐨勫揩</span><br><span class="line">INFO  Post found: 瀹夊崜鎵嬫満瀹夎JunoWallet锛岃交鏉捐禋缇庨噾锛岄個璇风爜 KZ1620662銆備翰锛屾潵锛?INFO  Post found: 鏉ョ湅鐪?3宀佷紛鑳介潤鐫€姣斿熀灏兼媿鐨勬柊骞村啓鐪?INFO  Post found: 鍙犺瀛愪紶缁燂紝鍙尽鏁屽崈閲?INFO  Post found: 涓変汉琛岃帿鍓嶅悗鎺ヨ€?INFO  Post found: 姝ｅ悜鍔涢噺20130114</span><br><span class="line">INFO  Post found: 3-4澶╂病鎬庝箞杩涢锛?8灏忔椂鏈悎鐪笺€傘€傘€?INFO  Post found: 閭ｄ簺骞达紝涓€璧烽€涜繃鐨勫綍鍍忓巺1</span><br><span class="line">INFO  Post found: 29浜跨殑鍥板眬</span><br><span class="line">INFO  Post found: 鏄庢槦楂樼涓嶅繀瑕佷笌浼佷笟涓€鐩村瓨鍦?INFO  Post found: 鏈夋湅鑷繙鏂规潵</span><br><span class="line">INFO  Post found: 楹昏荆鎵嬫満锛屽悍甯堝倕鏂板勾鐜╄法鐣?INFO  Post found: PLC power line communication锛堢數鍔涚尗锛夊簲鐢ㄦ祴閫?INFO  Post found: 瀛︿範宕斿摬锛岀粓浜庝篃鎼炰釜clicki</span><br><span class="line">INFO  Post found: 鍧ゅ痉鎷夊啓浜?012鍦ｈ癁鐨刟bout me</span><br><span class="line">INFO  Post found: 11:28涔嬪墠娣捣宸峰畷鎺夛紝鐩墠缃戠珯鍙互姝ｅ父璁块棶</span><br><span class="line">INFO  Post found: 绠￠亾涔嬬棝锛岀棝鍦ㄥ埄娆茬啅蹇?INFO  Post found: 鏄ヨ妭鏈熼棿涓嶆洿鏂帮紝绁濆悇浣嶆柊骞村揩涔愶紝鍚堝鍥㈠渾锛?INFO  Post found: Godaddy瀵嗙爜鍙奝assword Hint涓㈠け锛屽偦鐡滃紡鎵惧洖2013</span><br><span class="line">INFO  Post found: 闀垮害涓庢棤搴︼紝涔熻皥鏉庡弻姹熶箣瀛?INFO  Post found: 绉戞妧鐨勬俯鎯呬笌瀛ょ嫭锛屽吋璋堟垚浜虹殑鐑︽伡</span><br><span class="line">INFO  Post found: 鍦╣odady鍏ユ墜www.standcare.com 鍩熷悕涓€鏋?INFO  Post found: 涓撲笟鐨勫鏈瘎璁哄彧鏈変竷涓鑰?INFO  Post found: 鎷晳鑷繁锛屾垨璁歌嚜淇℃湁鐐圭敤</span><br><span class="line">INFO  Post found: 鏁板涓庝汉鎬т箣寮?INFO  Post found: 蹇箰鍜岀粌涔?INFO  Post found: 鏅哄彇濞佽檸灞憋紝315鐙櫧</span><br><span class="line">INFO  Post found: 鍧氬畧鐖辨儏锛屽皬涓夊拰灏忓伔涔熶細鎮勭劧鑰岄€€</span><br><span class="line">INFO  Post found: 鎰熸縺锛屽彲浠ヨ鎴戜滑娲诲緱鏇撮暱涔?INFO  Post found: 鍧氭寔鍘熷垱锛屽仛鍒拌胺姝屾帓鍚嶇涓€</span><br><span class="line">INFO  Post found: 涓栫晫锛屾偍濂斤紒</span><br><span class="line">INFO  Post found: 璁剧疆涓や釜鍩熷悕鐨凞NS鎸囧悜鍚屼竴涓富鏈?-DONE</span><br><span class="line">INFO  Post found: 鍚紶鏍嬪疂銆婃墦铔埞銆?INFO  Post found: VAVACLOUD閫氳繃闃块噷浜戠敵璇风綉绔欏妗?INFO  Post found: 瑙ｅ喅WordPress绯荤粺妫€娴嬪埌鏂囦欢鐩綍鏉冮檺涓嶈冻锛屽疄鐜板畨瑁呮彃浠?INFO  Post found: 鎶靛埗锠㈣揣鈥斺€旇嚧闈掑勾</span><br><span class="line">INFO  Post found: 鏌ュ埌nginx.conf閰嶇疆鏂囦欢锛岃В鍐?13闂锛?13 Request Entity Too Large</span><br><span class="line">INFO  Post found: 涓や釜鍩熷悕鎴愬姛杞叆闃块噷浜戝強缃戠珯鐨勫嚑涓皬瑙勫垝v1.0</span><br><span class="line">INFO  Post found: 浣涙墜婀栬笍闈?INFO  Post found: 鍗椾含甯傞暱姹熷ぇ妗ユ杩庝綘</span><br><span class="line">INFO  Post found: 缃戠珯澶囨淇℃伅瀹屾垚姝ｇ‘鏄剧ず</span><br><span class="line">INFO  Post found: 鑿滃満鎷嗗幓浜嗕竴鍗?INFO  Post found: 娓呮槑鑺傚墠</span><br><span class="line">INFO  Post found: 浣曚互瑙ｅ咖</span><br><span class="line">INFO  Post found: 閫氳繃mysql鏇存柊url淇℃伅锛屽疄娴嬪畬鎴?INFO  Post found: 淇敼Nginx锛岃В鍐冲浐瀹氶摼鎺ユ洿鏂?04闂</span><br><span class="line">INFO  Post found: 5G瀵规櫤鎱т氦閫氬拰鏅烘収閲戣瀺褰卞搷鐨勫嚑鐐圭湅娉?INFO  Post found: 鍎垮瓙璇磋寰楁垜缁忓父璺熶粬璇寸殑閭ｄ簺璇濓紝涓嶈鎴戝啀璇达紝浜庢槸鎴戞潵鑰冭€冧粬</span><br><span class="line">INFO  Post found: 灏忕背10 Pro 涓嶅閿欒繃锛屾潵杩樻効浜?INFO  Post found: 鐜板疄鐨勬垜vs鐞嗘兂鐨勬垜</span><br><span class="line">INFO  Post found: 鎸戝墧鐨勫鎴疯鎴戜滑鏇存帴杩戠湡瀹炵殑闇€姹?INFO  Post found: 鎵撻€犱笓涓欼P涓嶆槸涓€鏃ヤ箣鍔?INFO  Post found: 鏌愭櫤鎱х鐞嗛」鐩殑鍏ㄩ璁℃敹鍒嗘瀽</span><br><span class="line">INFO  Post found: 鏌愰摱琛岀洃鎺х郴缁焩s鏌愮煶娌瑰叕鍙哥洃鎺х郴缁?INFO  Post found: NB-IOT 瀹氫綅鍣ㄥ湪绉诲姩鐘舵€佷笅鐗╄仈鐩戞帶鎬濊€?INFO  Post found: 鐩存挱鑳屽悗鐨勮棰戞祦澶勭悊</span><br><span class="line">INFO  Post found: 鍒╃敤閲戝瓧濉斿師鐞嗕紭鍖?G+鏅烘収浜ら€氭柟妗?INFO  Post found: 5G鍦ㄦ櫤鎱у叕璺鐞嗗嚑涓棶棰樿璁?INFO  Post found: 鍏充簬鏂囧寲鐨勯棶鍗峰洖绛?INFO  Post found: 璁存瓕</span><br><span class="line">INFO  Post found: 2011锛屽交搴曟敼鍙樹簡鎴戠殑鐢熸椿</span><br><span class="line">INFO  Post found: 闃撮槼绔欏彴涓哄摢鑸?INFO  Post found: 灏变簨璁轰簨-姘村涓嬮潰濂戒箻鍑?INFO  Post found: 鍑虹潰瀹佽</span><br><span class="line">INFO  Post found: 姝屾墜</span><br><span class="line">INFO  Post found: 璧拌繃2008</span><br><span class="line">INFO  Post found: 浜夊彇骞崇瓑浣曢』瀵嗚皨</span><br><span class="line">INFO  Post found: 褰撳惉鍒拌繖涓秷鎭?INFO  Post found: 鐬岀潯铏?INFO  Post found: 娣疯处鏃舵湡鐨勭埍鎯?INFO  Post found: 杩欎釜瀛ｈ妭</span><br><span class="line">INFO  Post found: 鐑熻崏浼犺</span><br><span class="line">INFO  Post found: 鍓茬ɑ瀛?INFO  Post found: 鏂囨槑鐨勮竟缂?INFO  Post found: 鍏冩湀涓夋棩鍗堝悗涓庤懀甯堝倕娓搁珮鏂板皬灞?INFO  Post found: 涓嬬彮褰掓棭</span><br><span class="line">INFO  Post found: 杩欏北涓嶈兘鍐嶇編浜嗭紝涓冩湀锛岃璺熸垜鏉?INFO  Post found: 鏈堝厜鏇?INFO  Post found: 杩滆埅鐨勯浮</span><br><span class="line">INFO  Post found: 10鍏噷鐙櫧</span><br><span class="line">INFO  Post found: 鍓茬ɑ瀛?INFO  Post found: 绗戣瘽鎯╃綒</span><br><span class="line">INFO  Post found: 澶滆壊锛岃悿鐏?INFO  Post found: 鍓茬ɑ瀛?鍒€瀹?涓ら</span><br><span class="line">INFO  Post found: 鐢辩洿鎾炕杞︼紝璇翠竴璇村浣曟纭殑瀵瑰緟闂</span><br><span class="line">INFO  Post found: 鍘荤摐鍩?INFO  Post found: 鑰佽</span><br><span class="line">INFO  Post found: 鍐烽棬璇椾汉鐨勫洶鎵?INFO  Post found: 涓嬩竴绔?鍥涘崄浜?INFO  Post found: 鐝嶇彔娉夌櫥闀垮煄鎬€鍙?INFO  Post found: 姘磋皟姝屽ご  鎼鍓嶅</span><br><span class="line">INFO  Post found: 瑗挎睙鏈埪封€嬮獞琛屾箹瑗胯閬囬洦 銆怷I JIANG YUE  CHINESE POEM銆?INFO  Post found: 浠嶲oS鏈嶅姟璐ㄩ噺璋堜紭鍏堢骇閲嶈鎬?INFO  Post found: 杩欏北涓嶈兘鍐嶇編浜?INFO  Post found: 鈥嬬揣鎬ョ殑JPS浼氳</span><br><span class="line">INFO  Post found: 銆婂敭鍓峂KT濉潙鎸囧崡銆嬬殑鎬濊矾涓庤鍒?INFO  Post found: 闇€姹備笌鏈夋晥闇€姹?INFO  Post found: 涓烘ⅵ鎯宠€屾椿-鑷撮珮鑰冭€?INFO  Post found: 鍑哄煄璁?INFO  Post found: 闀胯宸村反</span><br><span class="line">INFO  Post found: 2016骞?鏈?4鏃ヤ袱鍒欐柊闂绘湁鎰?INFO  Post found: Iztacc铆huatl灞辫胺闇茶惀璁板吋鎬€涓</span><br><span class="line">INFO  Post found: 璺粡缁嶅叴鎬€椴佽繀鍏堢敓</span><br><span class="line">INFO  Post found: 铦舵亱鑺辩澶滅紳</span><br><span class="line">INFO  Post found: 涓夋湀浼氬弸涓嶈嚦</span><br><span class="line">INFO  Post found: 纭竵</span><br><span class="line">INFO  Post found: 妗ュ寳鍛ㄨ瘎涔?INFO  Post found: 妗ュ寳鍛ㄨ瘎鍏?INFO  Post found: 閰嶇疆鏋佺畝涓婚 Crazy Uncle</span><br><span class="line">INFO  Post found: X鎬?INFO  Post found: 涓庢櫤鎱у悓琛?INFO  Post found: 闃挎尝缃椾笌娴＋寰?INFO  Post found: 瀹氫綅鎽囨憜鐨勫敭鍓嶆妧鏈?INFO  Post found: 鍗佷竴鏈埪疯糠澶?INFO  Post found: 鍏湀鎭嬫瓕</span><br><span class="line">INFO  Post found: 椤界煶</span><br><span class="line">INFO  Post found: 01 鍒濊瘑 Git</span><br><span class="line">INFO  Post found: 02 Git 鍛戒护鎽樺綍</span><br><span class="line">INFO  Post found: 鏅烘収涓栫晫娌℃湁绗ㄨ泲銆佺┓浜哄拰浜屾祦璇椾汉</span><br><span class="line">INFO  Post found: 娴佹按璐?INFO  Post found: 涓嶅Θ鎳傜偣鎴樼暐</span><br><span class="line">INFO  Post found: 鑰佷笁浣撴</span><br><span class="line">INFO  Post found: HEXO鎼缓鍗氬锛堜竴锛?INFO  Post found: 鐮斿彂涓庨攢鍞槸涓ょ被鐢熺墿锛岃涓ょ璇█</span><br><span class="line">INFO  Post found: 鍙戠幇涓€鏋氫笉姝ｇ粡鍞墠</span><br><span class="line">INFO  Post found: 鏈涙妤?INFO  Post found: 鎶曟爣</span><br><span class="line">INFO  Post found: 澶х害鍦ㄥ啲瀛?INFO  Post found: 姝ｇ粡鏍囦功鎺掑簭澶ф硶</span><br><span class="line">INFO  Post found: 2020鍐欏瓧灏忕粨</span><br><span class="line">INFO  Post found: 2020鍐欏瓧灏忕粨</span><br><span class="line">INFO  Post found: 涓鸿繍钀ュ晢璇村彞璇濓紝瀹炶返鏄楠岀湡鐞嗙殑涓€鎶婂昂瀛?INFO  Post found: 鏅烘収鍥尯绛旂枒绡?INFO  Post found: 鎵掓渤鐞愯</span><br><span class="line">WARN  15 posts did not have titles and were prefixed with &quot;Untitled Post&quot;.</span><br><span class="line">INFO  197 posts migrated.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="13">
+<li><p>当前的hexo还是本地部署的，未关联域名。</p>
+</li>
+<li><p>localhost:4000，出现了我想看到的一幕。</p>
+<p><img src="D:\gitLab\hexo-blog\vavadata\source\images\image1.JPG"></p>
+</li>
+</ol>
+<p>以英文模式输入~~~，成为,可以输出引用代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dsdjfjsdf</span><br></pre></td></tr></table></figure>
+<p>2021年1月8日</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/06/%E6%89%92%E6%B2%B3%E7%90%90%E8%AE%B0/" rel="prev" title="扒河琐记">
+      <i class="fa fa-chevron-left"></i> 扒河琐记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title-03-%E5%AE%9E%E6%B5%8B%EF%BC%9AHexo-migrate-wordpress%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-number">1.</span> <span class="nav-text">title: 03 实测：Hexo migrate wordpress到本地</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E6%B5%8B%EF%BC%9AHexo-migrate-wordpress%E5%88%B0%E6%9C%AC%E5%9C%B0%EF%BC%8Clocalhost%EF%BC%9A4000"><span class="nav-number"></span> <span class="nav-text">实测：Hexo migrate wordpress到本地，localhost：4000</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">过程回顾</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">369</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhangkun025" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhangkun025" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.huaihaixiang.com/" title="QQ → http:&#x2F;&#x2F;www.huaihaixiang.com" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

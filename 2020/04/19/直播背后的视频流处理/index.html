@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="0 引子  人人都是生活的奴隶,为了生活品质的提高，采取最适合自己的方式挣钱以换取更优质的保障，这种行为并不可耻，恰恰相反，无论从事的是何种岗位何种工种，收入几何，都值得以自己为荣，前提是不会对社会和其他人造成某种精神上的、或者肉体上的伤害。名人也参与直播带货，并且引起极大关注，是一件美好的事情，新颖的商业模式，新奇的体验方式，成为移动互联网时代一种现象级产物。 作为有幸参与到整个商业连环节中的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="直播背后的视频流处理">
+<meta property="og:url" content="http://example.com/2020/04/19/%E7%9B%B4%E6%92%AD%E8%83%8C%E5%90%8E%E7%9A%84%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0 引子  人人都是生活的奴隶,为了生活品质的提高，采取最适合自己的方式挣钱以换取更优质的保障，这种行为并不可耻，恰恰相反，无论从事的是何种岗位何种工种，收入几何，都值得以自己为荣，前提是不会对社会和其他人造成某种精神上的、或者肉体上的伤害。名人也参与直播带货，并且引起极大关注，是一件美好的事情，新颖的商业模式，新奇的体验方式，成为移动互联网时代一种现象级产物。 作为有幸参与到整个商业连环节中的一">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/04/image-3.png">
+<meta property="og:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/04/image-5.png">
+<meta property="article:published_time" content="2020-04-19T01:59:44.000Z">
+<meta property="article:modified_time" content="2021-01-08T14:32:57.993Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="直播">
+<meta property="article:tag" content="CDN">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="快手">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.huaihaixiang.com/wp-content/uploads/2020/04/image-3.png">
+
+<link rel="canonical" href="http://example.com/2020/04/19/%E7%9B%B4%E6%92%AD%E8%83%8C%E5%90%8E%E7%9A%84%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>直播背后的视频流处理 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/19/%E7%9B%B4%E6%92%AD%E8%83%8C%E5%90%8E%E7%9A%84%E8%A7%86%E9%A2%91%E6%B5%81%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          直播背后的视频流处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-19 09:59:44" itemprop="dateCreated datePublished" datetime="2020-04-19T09:59:44+08:00">2020-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-08 22:32:57" itemprop="dateModified" datetime="2021-01-08T22:32:57+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICT%E8%A1%8C%E4%B8%9A%E6%B4%9E%E5%AF%9F/" itemprop="url" rel="index"><span itemprop="name">ICT行业洞察</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>0 引子 </p>
+<p>人人都是生活的奴隶,为了生活品质的提高，采取最适合自己的方式挣钱以换取更优质的保障，这种行为并不可耻，恰恰相反，无论从事的是何种岗位何种工种，收入几何，都值得以自己为荣，前提是不会对社会和其他人造成某种精神上的、或者肉体上的伤害。名人也参与直播带货，并且引起极大关注，是一件美好的事情，新颖的商业模式，新奇的体验方式，成为移动互联网时代一种现象级产物。</p>
+<p>作为有幸参与到整个商业连环节中的一个，但是对于背后视频流的技术实现逻辑，还是有必要了解下的，正巧周五的一次短短的客户交流说到直播带宽需求，用快手来实现，这背后的视频流处理引起了我的注意，回来后跟吴老师一番讨论，也让我茅塞顿开。</p>
+<p><img src="http://www.huaihaixiang.com/wp-content/uploads/2020/04/image-3.png"></p>
+<p>1 直播很古老<br>直播，现场直播，living show， living broadcast。说起来新颖，其实形式上我们早已体验过。电视直播，广播直播就不说了，早期的QQ视频、MSN视频、SKYPE、YY多方等皆可视为直播，熊猫直播因为王思聪和美女加持，让直播一次一次出现在视野当中。这些看起来很远，不说也罢，就说电话这个通信形态，又何尝不是直播，双方你一言我一语的对话，或者多方电话会议。但是让直播这个概念全民参与的，抖音和快手功不可没，让普通人成为真正的主角，造成一种幻想，人人可参与，人人皆是明星。</p>
+<p>2 平台很重要</p>
+<p>直播环节中，平台的重要性不言而喻，我把它排在推流端和拉流端。推流端用于采集视频，拉流端用于播放视频，两端直接涉及用户体验，自然重要，但是其实都是围绕直播平台而生。如果没有平台统筹，推流和拉流端也只是个摆设。平台的好坏，是的决定了视频直播效果的底线。</p>
+<p>视频从前端采集到后端顺利播放，环节众多，涉及到的网元也极其庞大，平台的存在就是要控制这些设备联网联接、协议打通、以实现将采集到的视频，按照客户最希望接收到的方式，准确的传送出去。保证客户完美体验是最高目标，视频准确及时发送出去，是最低目标，在业务大规模推送之前，采用灰度测试、AB测试，可以提前让视频推送播放中的潜在的未知的问题，逐渐变为已知，从而一个一个解决掉。</p>
+<p>高质量的视频直播，少不了CDN支撑，业界能够提供CDN的服务很多，传统厂商网宿占据了大部分份额，但是云计算领域的大佬和运营商也天然具备这种条件。犹记得当年和Willian Chen、Ruiz Wang去Usacell客户那边介绍公司多媒体业务的时候，才知道CDN，后来在给MAXCOM客户部署OTT顶盒和CDN扩容，印象再次加深。现在几乎运营商和云计算厂商也将CDN服务作为业务之一。PS:USACELL是墨西哥无线运营商之一，属Salina Group集团，于2014年被美国AT&amp;T收购，成为其在墨西哥的三大无线运营商之一，MAXCOM是墨西哥地方固网运营商，主营业务为固话、宽带、OTT服务。</p>
+<p>像快手，抖音这样的大流量级直播平台，对最优质的CDN节点有着天然的渴望，为了确保视频的播放流畅度和操作，多CDN节点，成为其必然。尽管运营商、云厂家、网宿等具备全国CDN能力，但是地方差异明显，而且优势地盘未必有优质客户，所以直播平台在持续寻找最佳CDN合作伙伴，也在情理之中。基于成本，直播平台前期可能不会自建CDN，只能是选择最有路径，但是基于用户体验，演进成智能调控CDN才是王道。</p>
+<p>3 前后端配合</p>
+<p>这里面就是推流和拉流，这里面涉及到几个常用的协议，也有不少网友分享过，RTMP real time massage protocal ,HLS,Http Live Streaming 。主播端推流，主播通过终端设备，将视频推送到平台，平台对视频进行数据化结构化处理，例如编码；观看端拉流，平台将处理过的结构化数据通过网络进行全网推送，通过协议和终端应用APP上进行推送，用户点击，则请求发起，视频内容下发，然后解码、音画同步，收看视频内容。低端的配置是只能看，不能互动，但是高配版的是可以实时互动，甚至是互刷礼物，再高级的就是喊话下单，语音识别身份验证付款，一个“买”字喊出口，打通所有购物环节，然后订单、物品和消费账单随后就到。</p>
+<p>4 大数据处理</p>
+<p>视频流实现准确推送的手段有很多，随着大数据技术的成熟，在直播活动中进行直播数据的分布式、结构化处理是可以持续优化，基于大数据信息来反馈和监测业务层面的战略规划、统筹策略、执行效率、用户体验，正式基于这些理解，技术人员在背后做了大量的工作，进一步细分执行界面，为业务高效率运转而不懈努力，让用户时刻可以看到最优质的视频影像。</p>
+<p><img src="http://www.huaihaixiang.com/wp-content/uploads/2020/04/image-5.png"></p>
+<p>5 明天会更好<br>视频直播，从之前靠观众打赏，赠送虚拟礼物到现在的专业团队运作，实现直播带货，一路走来，打开了互联网+购物的新世界。从名人到平民，老一代网红到新生代网红，主播的人物变换可谓多姿多彩，令人沉醉其中，剁剁剁而欲罢不能。大规模的普通终端用户是直播平台的财富，有些用户比较敏感，提出看似天马行空的要求，技术人员不妨保持高敏感度关注。这些看似有无的疑问也有可能是最接近完美的业务导向，触发引起新的技术演进方向。</p>
+<p>三言两句说不完直播中视频流的处理精华，感谢老罗、李佳奇、薇娅 、李国庆、朱广权等一众大佬在直播带货这条路上的引领，给大家带来了更便捷有趣的购物过程体验，让直播带货成为现象级事件，未来应该还会有更神奇的直播现象级事情发生，我们拭目以待。</p>
+<p>文中的图片来自快手罗喆当年的分享材料，有兴趣的朋友，可以看这里。<a target="_blank" rel="noopener" href="https://myslide.cn/slides/3029?vertical=1">快手在大数据驱动下的直播体验优化</a></p>
+<p>坤德拉 2020年4月18日</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag"># 直播</a>
+              <a href="/tags/CDN/" rel="tag"># CDN</a>
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+              <a href="/tags/%E5%BF%AB%E6%89%8B/" rel="tag"># 快手</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/16/nb-iot-%E5%AE%9A%E4%BD%8D%E5%99%A8%E5%9C%A8%E7%A7%BB%E5%8A%A8%E7%8A%B6%E6%80%81%E4%B8%8B%E7%89%A9%E8%81%94%E7%9B%91%E6%8E%A7%E6%80%9D%E8%80%83/" rel="prev" title="NB-IOT 定位器在移动状态下物联监控思考">
+      <i class="fa fa-chevron-left"></i> NB-IOT 定位器在移动状态下物联监控思考
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/25/%E5%88%A9%E7%94%A8%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86%E4%BC%98%E5%8C%965g%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A%E6%96%B9%E6%A1%88/" rel="next" title="利用金字塔原理优化5G+智慧交通方案">
+      利用金字塔原理优化5G+智慧交通方案 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">369</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhangkun025" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhangkun025" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.huaihaixiang.com/" title="QQ → http:&#x2F;&#x2F;www.huaihaixiang.com" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

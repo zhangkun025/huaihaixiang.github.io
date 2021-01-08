@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="今日同一个AR眼镜的厂家一起参与设备调试，主要是在上次的基础上带来了新版本，新版本对车牌识别的流程和时间进行了优化，可以快速实现车牌识别。测试不是正式商用，对于出现的结果其实是有几种预判：    非常完美，非常流畅，大家都看到了希望看到的结果，一次通过。   非常不完美，bug频出，APP闪退，测试无疾而终，并且也没有输出什么有意义的问题，对于未来版本的升级和优化，无任何参考价值。   测试过程相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为运营商说句话，实践是检验真理的一把尺子">
+<meta property="og:url" content="http://example.com/2020/12/29/%E4%B8%BA%E8%BF%90%E8%90%A5%E5%95%86%E8%AF%B4%E4%B8%A4%E5%8F%A5%E8%AF%9D%EF%BC%8C%E5%AE%9E%E8%B7%B5%E6%98%AF%E6%A3%80%E9%AA%8C%E7%9C%9F%E7%90%86%E7%9A%84%E4%B8%80%E6%8A%8A%E5%B0%BA%E5%AD%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今日同一个AR眼镜的厂家一起参与设备调试，主要是在上次的基础上带来了新版本，新版本对车牌识别的流程和时间进行了优化，可以快速实现车牌识别。测试不是正式商用，对于出现的结果其实是有几种预判：    非常完美，非常流畅，大家都看到了希望看到的结果，一次通过。   非常不完美，bug频出，APP闪退，测试无疾而终，并且也没有输出什么有意义的问题，对于未来版本的升级和优化，无任何参考价值。   测试过程相">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-28T16:02:01.000Z">
+<meta property="article:modified_time" content="2021-01-08T14:32:58.603Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="售前MKT填坑指南">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/12/29/%E4%B8%BA%E8%BF%90%E8%90%A5%E5%95%86%E8%AF%B4%E4%B8%A4%E5%8F%A5%E8%AF%9D%EF%BC%8C%E5%AE%9E%E8%B7%B5%E6%98%AF%E6%A3%80%E9%AA%8C%E7%9C%9F%E7%90%86%E7%9A%84%E4%B8%80%E6%8A%8A%E5%B0%BA%E5%AD%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>为运营商说句话，实践是检验真理的一把尺子 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/%E4%B8%BA%E8%BF%90%E8%90%A5%E5%95%86%E8%AF%B4%E4%B8%A4%E5%8F%A5%E8%AF%9D%EF%BC%8C%E5%AE%9E%E8%B7%B5%E6%98%AF%E6%A3%80%E9%AA%8C%E7%9C%9F%E7%90%86%E7%9A%84%E4%B8%80%E6%8A%8A%E5%B0%BA%E5%AD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          为运营商说句话，实践是检验真理的一把尺子
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-29 00:02:01" itemprop="dateCreated datePublished" datetime="2020-12-29T00:02:01+08:00">2020-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-08 22:32:58" itemprop="dateModified" datetime="2021-01-08T22:32:58+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MKT%E6%88%98%E7%95%A5%E8%83%8C%E9%94%85/" itemprop="url" rel="index"><span itemprop="name">MKT战略背锅</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今日同一个AR眼镜的厂家一起参与设备调试，主要是在上次的基础上带来了新版本，新版本对车牌识别的流程和时间进行了优化，可以快速实现车牌识别。测试不是正式商用，对于出现的结果其实是有几种预判：</p>
+<ul>
+<li>  非常完美，非常流畅，大家都看到了希望看到的结果，一次通过。</li>
+<li>  非常不完美，bug频出，APP闪退，测试无疾而终，并且也没有输出什么有意义的问题，对于未来版本的升级和优化，无任何参考价值。</li>
+<li>  测试过程相对曲折，中间更换手机，更换网络接入方式，更换测试场景，更换软件版本等，但是最终看到了一些不够完美的结果；同时也总结了部分经验，用于下一次版本升级。</li>
+</ul>
+<p>我们这次的结果应该是第3种，测试的过程相对不流畅。按照这款产品设计思路，在AR眼镜抓取识别物的时候，是需要将信息送回到平台验证，然后返回比对结果。。 测试从流程来看，与网络相关、与APP的工作机制、与平台的互通、与AR眼镜自身的性能有关。只是有一段时间，在室外测试车牌识别的时候，没有结果返回，或者时间比较长。 本着讲客观、讲科学的思路，似乎从前面涉及的四个方面进行问题定位，应该不算是跑偏，可是这位技术人员，首先说可能是网络问题。尽管当时测试用的是电信或者移动的手机卡。其实在测试之初，我们已经告诉他，这里除了一家运营商，其他两家信号都不咋好，当然，电信可能会好些，移动信号就真不知道了。毕竟没关注过他们在这里究竟有多少个基站，尽管他们的大楼就在隔壁。 当然，这位技术人员的说法可能是对的，但也不排除是另外一种结果，。。依然改变不了当前人们普遍存在对互联网企业和运营商服务的区别对待。互联网厂家往往提供APP作为互联入口，成为普通人感受到直接的地方。。。APP好用，自然是推出APP性能优、质量棒；如果不好用，第一个怀疑和甩锅的，往往就是是运营商的网络问题，信号问题了。因为信号不好，所以测试看不出来效果；因为信号不好，所以返回结果时间长；因为不好，所以有乱码，有bug，有闪退；因为信号不好，有。。。   毫无疑问，类似的互联网厂家在提供便利服务同时，同时也几乎控制着大部分互联网入口。人们/消费者一方面极度享受互联网厂家提供的种种便利，一方面也不可避免的深陷其中，乐此不疲。当然大家都知道这些应用搭载在运营商网络上面，只是这种无无线网络看不见摸不着，虽然没有直接做成APP，但是大多数人还是可以靠手机上显示的信号强度来识别好坏。若想体会到良好的互联网服务，网络的功能并不能随意被抹杀。 话说APP若呈现良好的效果，至少需终端、网络、平台和APP自身性能支持，作为一个做技术的人，建议还是要持续的保持这种全局性思维。如果之前没有，没有关系，从今天开始，抛弃那种测试结果不好，首先就想到网络问题上去的思维。。。不是说运营商人员听到了会不开心，只是担心这样可能会让产品开发的同学容易又多走了些弯路，错过真正发现问题和优化的机会。 我也曾经做过测试不知道多个时间了，深有感触，为了锁定bug，陪着少华和本地的外籍Fernando在totalplay客户那边，熬夜进行测试，直到所有问题全部复现，然后在三个人充分讨论下，输出出一份测试报告。 验证性测试，尤其是在新版本、新环境下测试验证的时候，在没有将整个测试过程重新跑一遍，没有完全复现当时的测试bug，没有出看到正式测试报告，该存疑存疑。 实践是检验真理的一把戒尺，我们可以更好的利用起来。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%94%AE%E5%89%8DMKT%E5%A1%AB%E5%9D%91%E6%8C%87%E5%8D%97/" rel="tag"># 售前MKT填坑指南</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/26/2020%E5%86%99%E5%AD%97%E5%B0%8F%E7%BB%93-2/" rel="prev" title="2020写字小结">
+      <i class="fa fa-chevron-left"></i> 2020写字小结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/31/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">369</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhangkun025" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhangkun025" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.huaihaixiang.com/" title="QQ → http:&#x2F;&#x2F;www.huaihaixiang.com" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

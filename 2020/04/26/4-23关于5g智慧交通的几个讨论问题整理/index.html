@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="0 引子 两周前交通厅牵头四家运营商签署了5G智慧交通战略合作，一周发布了交通强国江苏计划，近期又安排几家运营商去交流5G创新应用和交流，一系列事件的迹象来看，新基建之一5G智慧交通作在江苏的动作明显快了起来。在某移动公司之后，我以公司的角度向客户汇报了公司在5G和智慧交通方面的工作进展和产品方案，在前一篇利用金字塔原理优化5G+智慧交通方案有所提及。其实此次交流目的非常单纯和直接，一是向政府客户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5G在智慧公路管理几个问题讨论">
+<meta property="og:url" content="http://example.com/2020/04/26/4-23%E5%85%B3%E4%BA%8E5g%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A%E7%9A%84%E5%87%A0%E4%B8%AA%E8%AE%A8%E8%AE%BA%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="0 引子 两周前交通厅牵头四家运营商签署了5G智慧交通战略合作，一周发布了交通强国江苏计划，近期又安排几家运营商去交流5G创新应用和交流，一系列事件的迹象来看，新基建之一5G智慧交通作在江苏的动作明显快了起来。在某移动公司之后，我以公司的角度向客户汇报了公司在5G和智慧交通方面的工作进展和产品方案，在前一篇利用金字塔原理优化5G+智慧交通方案有所提及。其实此次交流目的非常单纯和直接，一是向政府客户">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-25T16:11:04.000Z">
+<meta property="article:modified_time" content="2021-01-08T14:32:58.006Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="5G">
+<meta property="article:tag" content="公路养护">
+<meta property="article:tag" content="智慧交通">
+<meta property="article:tag" content="车路协同">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/04/26/4-23%E5%85%B3%E4%BA%8E5g%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A%E7%9A%84%E5%87%A0%E4%B8%AA%E8%AE%A8%E8%AE%BA%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>5G在智慧公路管理几个问题讨论 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/26/4-23%E5%85%B3%E4%BA%8E5g%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A%E7%9A%84%E5%87%A0%E4%B8%AA%E8%AE%A8%E8%AE%BA%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          5G在智慧公路管理几个问题讨论
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-26 00:11:04" itemprop="dateCreated datePublished" datetime="2020-04-26T00:11:04+08:00">2020-04-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-08 22:32:58" itemprop="dateModified" datetime="2021-01-08T22:32:58+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICT%E8%A1%8C%E4%B8%9A%E6%B4%9E%E5%AF%9F/" itemprop="url" rel="index"><span itemprop="name">ICT行业洞察</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ict-e8-a1-8c-e4-b8-9a-e6-b4-9e-e5-af-9f/" itemprop="url" rel="index"><span itemprop="name">ict%e8%a1%8c%e4%b8%9a%e6%b4%9e%e5%af%9f</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ict-e8-a1-8c-e4-b8-9a-e6-b4-9e-e5-af-9f/%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A/" itemprop="url" rel="index"><span itemprop="name">智慧交通</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>0 引子</p>
+<p>两周前交通厅牵头四家运营商签署了5G智慧交通战略合作，一周发布了交通强国江苏计划，近期又安排几家运营商去交流5G创新应用和交流，一系列事件的迹象来看，新基建之一5G智慧交通作在江苏的动作明显快了起来。在某移动公司之后，我以公司的角度向客户汇报了公司在5G和智慧交通方面的工作进展和产品方案，在前一篇<a target="_blank" rel="noopener" href="http://www.huaihaixiang.com/1007/.html">利用金字塔原理优化5G+智慧交通方案</a>有所提及。其实此次交流目的非常单纯和直接，一是向政府客户介绍公司的新定位，和在前沿的研究和实践，二是看一看客户的反馈，尝试挖掘下他们的实际诉求，寻求卖货机会。</p>
+<p>01 互联网+行业的隔阂</p>
+<p>随着消费互联网的增长趋势日趋见顶，市场对产业互联网的兴趣越来越大，引发了具有互联网背景、通信背景的公司和企业不停的向产业界高歌猛进，试图借由自身在消费互联网的技术优势和市场优势，在产业界浩浩荡荡的闯出一番新天地。理想很丰满的，现实很骨感，并且往往如此，有些时候双方也不在一个频道上。以交通为例，双方在对智慧交通的整体规划思路、执行措施、信息共享和需求沟通等，往往少不了磨合的过程，在这几个地方进行充分沟通之后，或许可以碰撞出一个相对合适的方案，能够真正给交通行业的管理和服务带来价值，实现一定程度的降本增效。如下就分别聊聊这次收集到的客户反馈的一些管理和服务需求。</p>
+<p>02 客户反馈的问题-5G建设问题</p>
+<p>会议上一位客户领导坦言到，之前交通路网和通信路网是近乎割裂的两张网，除了硬件设备和网络的联通上有些交集，其他的交集少之又少，一些基本的信息也未实现互联互通。比较典型的在一些工程项目上，容易出现通信线缆被挖断，这边修好之后，后面不知道哪天又被挖断了。几个运营商的资源不一样，基站部署地方也有很大不同。新业务部署或者设备上新，很可能会面临不同的工作界面。现在5G来了，不知道是不是这么处理？是否需要预留一些站址或者线路资源，以备后续项目建设使用，但是现在也没有明确。并且这种关于5G的投资，譬如在交通路网的覆盖建设，是由谁来负责投资建设。按照以往经验，交通方没有参与这种投资，所以5G基础设施建设的投资对他们来说，内外部挑战很大。</p>
+<p>依照目前的建设策略来看，5G建设由业务需求来推动，先业务而后网络，跟前几代的移动网建设思路有很大不同。而公路，尤其是全省将近14万公里的普通公路多在县级以下的农村路，窄则3.5-4.5米，宽则5.5-6米，随着地域的变化，业务差别很大，苏南、苏中和苏北有很大不同，如何实现5G快速和高效覆盖，是一个比较现实的问题。</p>
+<p>客户反馈的问题-5G业务问题</p>
+<p>相对于4G网络，5G SA组网实现的切片技术，是否会跟4G时代有很大不同，应该会有一个专网，但是这个5G专网会不会在业务繁忙的时候出现跟大网和普通服务网络抢信道和带宽的情况，QoS如何来保证，如何避免企业业务的拥塞和掉话。5G在智慧公路基础设施的建设中的作用具体体现在哪里，有没有一种场景非5G不可？</p>
+<p>03 客户关于信息化建设的满意和不满意</p>
+<p>交通这块自己也是积极做一些信息化的建设，但是距离实现更高层次的信息化管理，乃至智慧交通，仍存在较大差距。客户管理部门规划了一网一平台建设来管理14万公里的公路，使用了信息化手段来监测省内70多座桥梁 ，在无锡开建省内第一条智慧普通公路324公路示范，并且在一些工地上进行了智慧工地的尝试。</p>
+<p>对公路养护管理，也进行一系列的对比和分析，但是也未能达到理想效果。同一个路况问题，由于监测人员水平和经验的不同，被反馈成两个截然不同的结论，成为一种常态，加上当时获取的信息和实地二次核查时间的延迟，原来登记的问题，往往会产生相当大的变化。县级公路季度检查，村级公路半年或者1年才检查一次，这种低频率的检查方式，给后续的管理和维护工作带来了较大的困扰和资金浪费。</p>
+<p>客户虽然有些团队也在采用信息化的手段来检公路，但实际效果差强人意，这些数据跟常规的标准达不到统一，数据与数据之间的壁垒依然存在。</p>
+<p>04 结尾</p>
+<p>5G智慧服务区在最后被提及，但是客户看起来对我的答案不是很满意。。。以上谈到的种种，或许构成了我下一个阶段的研究方向的线索，但是要想出一个小小的成果，可能需要更多的尝试。</p>
+<p>坤德拉 2020年4月25日</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/5G/" rel="tag"># 5G</a>
+              <a href="/tags/%E5%85%AC%E8%B7%AF%E5%85%BB%E6%8A%A4/" rel="tag"># 公路养护</a>
+              <a href="/tags/%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A/" rel="tag"># 智慧交通</a>
+              <a href="/tags/%E8%BD%A6%E8%B7%AF%E5%8D%8F%E5%90%8C/" rel="tag"># 车路协同</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/25/%E5%88%A9%E7%94%A8%E9%87%91%E5%AD%97%E5%A1%94%E5%8E%9F%E7%90%86%E4%BC%98%E5%8C%965g%E6%99%BA%E6%85%A7%E4%BA%A4%E9%80%9A%E6%96%B9%E6%A1%88/" rel="prev" title="利用金字塔原理优化5G+智慧交通方案">
+      <i class="fa fa-chevron-left"></i> 利用金字塔原理优化5G+智慧交通方案
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/29/%E5%85%B3%E4%BA%8E%E6%96%87%E5%8C%96%E7%9A%84%E9%97%AE%E5%8D%B7%E5%9B%9E%E7%AD%94/" rel="next" title="关于文化的问卷回答">
+      关于文化的问卷回答 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">369</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhangkun025" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhangkun025" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.huaihaixiang.com/" title="QQ → http:&#x2F;&#x2F;www.huaihaixiang.com" rel="noopener" target="_blank"><i class="fab fa-skype fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
